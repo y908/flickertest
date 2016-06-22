@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>test</title>
+  <!--jQuery CDN-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+</head>
+<body>
+
+<!--dumps images-->
+<div id="here"></div>
+<div id="test">test</div>
+
+
+<script type="text/javascript">
+  
+  
+  var queryURL = "https://api.flickr.com/services/rest/?&method=flickr.people.getPublicPhotos&api_key=87d4ef71bdff0695666b4d895cb3b651&user_id=143492386@N03&format=json&per_page=500"
+
+
+  console.log(queryURL);
+
+  $.ajax({
+      url: queryURL,
+      dataType: 'xml',
+      method:'GET'
+  })
+
+  .done(function(response){
+    var img = (response);
+    console.log(img);
+     $('#here').append(JSON.photos.photo.title);
+
+
+  })
+</script>
+</body>
+</html>
