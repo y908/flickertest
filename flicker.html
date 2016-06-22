@@ -21,19 +21,16 @@
 
   console.log(queryURL);
 
-  $.ajax({
-      url: queryURL,
-      dataType: 'xml',
-      method:'GET'
-  })
+   $.ajax({url: queryURL, method: 'GET'})
 
-  .done(function(response){
-    var img = (response);
-    console.log(img);
+        .done(function(response) {
+         var results = response.data;
+       });
+
+
+  
      $('#here').append(JSON.photos.photo.title);
 
-
-  })
 </script>
 </body>
 </html>
