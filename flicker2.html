@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>flickr</title>
+  <!--jQuery CDN and loads javascript-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+</head>
+<body>
+
+<!--dumps images-->
+<div id="here"></div>
+<div id="test">flickr</div>
+
+<script type="text/javascript">
+  
+//My API key
+var apiKey = "87d4ef71bdff0695666b4d895cb3b651";
+	
+
+// create variables
+var apiurl;
+var apiurl_size;
+var selected_size;  
+
+// set size
+selected_size=75; 
+ 
+// url for API
+apiurl = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=" + apiKey  + "&per_page=10&format=json&nojsoncallback=1";  
+
+$(document).ready(function(){  
+
+//	$('#button').click(function(){  
+     
+		$.getJSON(apiurl,function(jsonFTW){  //called jsonFTW to not confuse with JSON
+
+			console.log(jsonFTW);
+
+			$.each(jsonFTW.photos.photo,function(i,myresult){  //.each iterates
+
+				console.log("running" + i);
+				
+				apiurl_size = "https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=" + apiKey + "&photo_id="+myresult.id+"&format=json&nojsoncallback=1"; 
+
+
+						$.getJSON(apiurl_size,function(size){  
+
+							console.log(size);
+
+							$.each(size.sizes.size,function(i,myresult_size){  
+
+
+								console.log("doing" + i);
+
+								// this only shows the images of the correct size !!!
+								// otherwise ALL size types of each image is displayed !!!
+								if(myresult_size.width==selected_size){  
+									$("#results").append('<a href="'+myresult_size.url+'" target="_blank"><img src="'+myresult_size.source+'"/></a>');  
+								}  
+
+							})  
+
+						})  
+
+
+			});  
+
+		});  
+
+//	});  
+
+});
+
+
+
+
+</script>
+
+
+<div id="results"></div>  
+
+
+</body>
+</html>

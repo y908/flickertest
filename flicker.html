@@ -18,9 +18,6 @@
   
   var queryURL = "https://api.flickr.com/services/rest/?&method=flickr.people.getPublicPhotos&api_key=87d4ef71bdff0695666b4d895cb3b651&user_id=143492386@N03&format=json&per_page=500"
 
-
-  console.log(queryURL);
-
    $.ajax({url: queryURL, method: 'GET'})
 
         .done(function(response) {
@@ -29,7 +26,7 @@
 
 
   
-     $('#here').append(JSON.photos.photo.title);
+   //  $('#here').append(JSON.photos.photo.title);
 
 </script>
 </body>
